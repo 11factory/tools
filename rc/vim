@@ -1,0 +1,90 @@
+execute pathogen#infect()
+set backspace=2		   " more powerful backspacing "
+set background=light
+syntax on
+set incsearch        " Used for incremental searching "
+set hlsearch         " Turns on highlighting for matched search patterns "
+set number
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
+set ignorecase
+set pastetoggle=<F6>
+set laststatus=2
+" Remove AG help usage on search results
+let g:ag_mapping_message=0
+
+" Tabs navigation
+nnoremap <C-Left> :tabprevious
+nnoremap <C-Right> :tabnext
+
+"Ctrp + CTags
+nnoremap <leader>. :CtrlPTag<cr>
+
+"Reveal current buffer in NERDTree
+map <leader>r :NERDTreeFind<cr>
+
+"Ack current word
+nmap <F7> "syiw:Ag! <c-r>s<CR>
+imap <F7> <esc>"syiw:Ag! <c-r>s<CR>
+vmap <F7> "sy:Ag! <c-r>s<CR>
+
+"Run single test under cursor
+nmap <leader>tt <CR>/'\\|"<CR>N"xy1llv/<c-r>x<CR>h"sy:VimuxRunCommand 'RBENV_VERSION=1.9.3-p194 ruby -Itest ' . @% . ' -n "/<c-r>s/"'<CR>
+" nmap <leader>t :VimuxRunCommand 'RBENV_VERSION=1.9.3-p194 ruby -Itest ' . @%<CR>
+nmap <leader>t :VimuxRunCommand 'SECRET_TOKEN=foo_bar bin/rspec ' . @%<CR>
+nmap <leader>j :VimuxRunCommand 'export SECRET_TOKEN=foo_bar; gulp test:e2e --verbose --spec_path ' . @%<CR>
+nmap <leader>c :VimuxRunCommand 'rubocop -a ' . @%<CR>
+
+
+" Vundle
+filetype off                  " required"
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'bling/vim-airline'
+Plugin 'benmills/vimux' " can call command on tmux pane via :VimuxRunCommand
+Plugin 'Chiel92/vim-autoformat' " :Autoformat
+Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim' " fastest ack fork
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/cream-showinvisibles' " F4 to show invisibles
+Plugin 'mattn/emmet-vim' " write html with abbr syntax
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'brendonrapp/smyck-vim'
+Plugin 'godlygeek/csapprox'
+Plugin 'tpope/vim-surround'
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+" ctrlp.vim configuration
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,tags     " MacOSX/Linux
+
+" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" Ignore some folders and files for CtrlP indexing
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  'node_modules$\|\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+  \ 'file': '\.exe$\|\.so$\|\.dat$'
+  \ }
+
+
+" vim-ruby configuration, dependency of syntastic
+if !empty(matchstr(system('rbenv version'), 'jruby'))
+  let g:ruby_path = system('rbenv which ruby')
+endif
+
+" Theme
+so /Users/lcobos/.vimthemes/railscasts.vim
