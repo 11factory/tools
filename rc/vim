@@ -66,6 +66,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'brendonrapp/smyck-vim'
 Plugin 'godlygeek/csapprox'
 Plugin 'tpope/vim-surround'
+Plugin 'xolox/vim-easytags' " auto update CTAGS
+Plugin 'xolox/vim-misc' " required by vim-easytags
 call vundle#end()            " required
 filetype plugin indent on    " required
 
