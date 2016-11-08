@@ -29,17 +29,21 @@ nnoremap <leader>. :CtrlPTag<cr>
 "Reveal current buffer in NERDTree
 map <leader>r :NERDTreeFind<cr>
 
-"Ack current word
+" Ack current word
 nmap <F7> "syiw:Ag! <c-r>s<CR>
 imap <F7> <esc>"syiw:Ag! <c-r>s<CR>
 vmap <F7> "sy:Ag! <c-r>s<CR>
 
-"Run single test under cursor
-nmap <leader>tt <CR>/'\\|"<CR>N"xy1llv/<c-r>x<CR>h"sy:VimuxRunCommand 'RBENV_VERSION=1.9.3-p194 ruby -Itest ' . @% . ' -n "/<c-r>s/"'<CR>
-" nmap <leader>t :VimuxRunCommand 'RBENV_VERSION=1.9.3-p194 ruby -Itest ' . @%<CR>
+" Replace selection prompt
+nmap <leader>m :%s///g<left><left>
+" Run current spec file
 nmap <leader>t :VimuxRunCommand 'SECRET_TOKEN=foo_bar bin/rspec ' . @%<CR>
+" Run current javascript spec file
 nmap <leader>j :VimuxRunCommand 'export SECRET_TOKEN=foo_bar; gulp test:e2e --watch --verbose --spec_path ' . @%<CR>
+" Run rubocop for current file
 nmap <leader>c :VimuxRunCommand 'rubocop -a ' . @%<CR>
+" Close all tabs but current
+nmap <leader>o :tabonly<CR>
 
 " Removing escape
 ino jj <esc>  
