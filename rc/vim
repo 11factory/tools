@@ -35,7 +35,7 @@ imap <F7> <esc>"syiw:Ag! <c-r>s<CR>
 vmap <F7> "sy:Ag! <c-r>s<CR>
 
 " Replace selection prompt
-nmap <leader>m :%s///g<left><left>
+nmap <leader>m :%s///gc<left><left>
 " Run current spec file
 nmap <leader>t :VimuxRunCommand 'SECRET_TOKEN=foo_bar bin/rspec ' . @%<CR>
 " Run current javascript spec file
