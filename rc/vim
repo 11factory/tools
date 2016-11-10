@@ -19,6 +19,9 @@ set laststatus=2
 " Remove AG help usage on search results
 let g:ag_mapping_message=0
 
+" completion
+au FileType * execute 'setlocal dictionary+=~/.vim/words/'.&filetype.'.dict'
+
 " Tabs navigation
 nnoremap <C-Left> :tabprevious
 nnoremap <C-Right> :tabnext
@@ -35,7 +38,7 @@ imap <F7> <esc>"syiw:Ag! <c-r>s<CR>
 vmap <F7> "sy:Ag! <c-r>s<CR>
 
 " Replace selection prompt
-nmap <leader>m :%s///gc<left><left>
+nmap <leader>m :%s///gc<left><left><left>
 " Run current spec file
 nmap <leader>t :VimuxRunCommand 'SECRET_TOKEN=foo_bar bin/rspec ' . @%<CR>
 " Run current javascript spec file
@@ -44,6 +47,8 @@ nmap <leader>j :VimuxRunCommand 'export SECRET_TOKEN=foo_bar; gulp test:e2e --wa
 nmap <leader>c :VimuxRunCommand 'rubocop -a ' . @%<CR>
 " Close all tabs but current
 nmap <leader>o :tabonly<CR>
+" Tags window
+nmap <F8> :TagbarToggle<CR> 
 
 " Removing escape
 ino jj <esc>  
@@ -82,8 +87,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'brendonrapp/smyck-vim'
 Plugin 'godlygeek/csapprox'
 Plugin 'tpope/vim-surround'
-" Plugin 'xolox/vim-easytags' " auto update CTAGS
-" Plugin 'xolox/vim-misc' " required by vim-easytags
+Plugin 'majutsushi/tagbar' " tags window (F8)
 call vundle#end()            " required
 filetype plugin indent on    " required
 
