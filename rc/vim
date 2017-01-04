@@ -42,7 +42,7 @@ nmap <leader>m :%s///gc<left><left><left>
 " Run current spec file
 nmap <leader>t :VimuxRunCommand 'SECRET_TOKEN=foo_bar bin/rspec ' . @%<CR>
 " Run current javascript spec file
-nmap <leader>j :VimuxRunCommand 'export SECRET_TOKEN=foo_bar; gulp test:e2e --watch --verbose --spec_path ' . @%<CR>
+nmap <leader>j :VimuxRunCommand 'export SECRET_TOKEN=foo_bar; LC_NUMERIC="en_US.UTF-8" gulp test:e2e --watch --verbose --spec_path ' . @%<CR>
 " Run rubocop for current file
 nmap <leader>c :VimuxRunCommand 'rubocop -a ' . @%<CR>
 " Close all tabs but current
@@ -88,6 +88,7 @@ Plugin 'brendonrapp/smyck-vim'
 Plugin 'godlygeek/csapprox'
 Plugin 'tpope/vim-surround'
 Plugin 'majutsushi/tagbar' " tags window (F8)
+Plugin 'tpope/vim-abolish' " crc = myObject crm = MyObject crs = my_object cru = MYOBJECT
 call vundle#end()            " required
 filetype plugin indent on    " required
 
